@@ -5,9 +5,9 @@ import {RecoverPassword} from './pages/RecoverPassword';
 import {ConfirmAccount} from './pages/ConfirmAccount';
 import {AuthLayout} from './layouts/AuthLayout';
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
-export const app = () => {
+export const App = () => {
   return (
-<BrowserRouter>
+    <BrowserRouter>
       <Routes>
         <Route
           path='/'
@@ -17,25 +17,25 @@ export const app = () => {
             index
             element={<Login/>}
           />
-            <Route
+           <Route
             path='register'
             element={<Register/>}
           />
-            <Route
-            path='forgot-password'
+           <Route
+            path='forget-password'
             element={<ForgotPassword/>}
           />
-            <Route
+           <Route
             path='recover-password/:token'
             element={<RecoverPassword/>}
           />
-            <Route
+          <Route
             path='confirm/:token'
             element={<ConfirmAccount/>}
           />
-                      <Route
+           <Route
             path='*'
-            element={<h1> Eror 404 not found </h1>}
+            element={<h1>404 Not Found</h1>}
           />
         </Route>
       </Routes>
