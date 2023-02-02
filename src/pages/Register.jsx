@@ -57,7 +57,7 @@ try {
   
 } catch (error) {
   console.error(error)
-  handleShowAlert(error.response.data.msg)
+  handleShowAlert(error.response?.data.msg)
 }
 };
 const handleShowAlert = (msg) => {
