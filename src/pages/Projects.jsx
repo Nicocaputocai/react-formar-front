@@ -1,7 +1,14 @@
 import React from 'react'
+import { ProjectPreview } from '../components/ProjectPreview/ProjectPreview'
 
 export const Projects = () => {
   return (
-    <div>Projects</div>
+    <>
+    <h1>Projects</h1>
+    <>
+    <ProjectPreview />
+    </>
+    
+    </>
   )
 }
