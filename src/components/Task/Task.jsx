@@ -1,34 +1,69 @@
-import React from 'react'
-import { Button, Container } from 'react-bootstrap'
+// import React from 'react'
+// import { Button, Container } from 'react-bootstrap'
+
+// export const Task = () => {
+//     return (
+//         <>
+//             <Container>
+//                 <>
+//                     <p>Nombre de la tarea</p>
+//                     <p>Descripción de la tarea</p>
+//                     <p>Fecha de entrega</p>
+//                     <p>Prioridad</p>
+//                 </>
+//                 <>
+//                     <Button
+//                     /* onClick={} */
+//                     >
+//                         Editar
+//                     </Button>
+
+//                     <Button>
+//                         Completa/Incompleta
+//                     </Button>
+
+//                     <Button
+//                     /* onClick={} */
+//                     >
+//                         Eliminar
+//                     </Button>
+//                 </>
+//             </Container>
+//         </>
+//     )
+// }
+
+// de Eric
+import React from "react";
 
 export const Task = () => {
-    return (
-        <>
-            <Container>
-                <>
-                    <p>Nombre de la tarea</p>
-                    <p>Descripción de la tarea</p>
-                    <p>Fecha de entrega</p>
-                    <p>Prioridad</p>
-                </>
-                <>
-                    <Button
-                    /* onClick={} */
-                    >
-                        Editar
-                    </Button>
+  return (
+    <div className="flex justify-between bg-white p-5 mb-5 shadow-md">
+      <div>
+        <p className="mb-1 text-xl">Tarea</p>
+        <p className="mb-1 text-sm text-gray-500 uppercase">Descripción</p>
+        <p className="mb-1 text-xl">Fecha de entrega</p>
+        <p className="mb-1 text-gray-600">Prioridad</p>
+      </div>
+      <div className="flex flex-col lg:flex-row lg:items-start gap-2">
+        <button className="bg-indigo-600 p-2 text-white uppercase font-bold text-sm rounded-lg">
+          Editar
+        </button>
 
-                    <Button>
-                        Completa/Incompleta
-                    </Button>
+        {false ? (
+          <button className="bg-sky-600 p-2 text-white uppercase font-bold text-sm rounded-lg">
+            Completa
+          </button>
+        ) : (
+          <button className="bg-gray-600 p-2 text-white uppercase font-bold text-sm rounded-lg">
+            Incompleta
+          </button>
+        )}
 
-                    <Button
-                    /* onClick={} */
-                    >
-                        Eliminar
-                    </Button>
-                </>
-            </Container>
-        </>
-    )
-}
+        <button className="bg-red-600 p-2 text-white uppercase font-bold text-sm rounded-lg">
+          Eliminar
+        </button>
+      </div>
+    </div>
+  );
+};

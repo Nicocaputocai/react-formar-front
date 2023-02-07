@@ -11,10 +11,12 @@ import { Projects } from "./pages/Projects";
 import { ProjectAdd } from "./pages/ProjectAdd";
 import { ProjectEdit } from "./pages/ProjectEdit";
 import { Project } from "./pages/Project";
+import { ProjectsProvider } from "./context/ProjectsProvider";
 export const App = () => {
   return (
     <BrowserRouter>
       <AuthProvider>
+        <ProjectsProvider>
         <Routes>
           {/* Rutas públicas */}
           <Route path="/" element={<AuthLayout />}>
@@ -51,6 +53,7 @@ export const App = () => {
             />
         </Route>        
         </Routes>
+        </ProjectsProvider>
       </AuthProvider>
     </BrowserRouter>
   );

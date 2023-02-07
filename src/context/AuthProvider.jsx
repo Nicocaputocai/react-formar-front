@@ -20,12 +20,14 @@ const AuthProvider = ({children}) => {
             }
             try {
                 const {data} = await clientAxios.get('/users/profile', config)
-                // console.log(data);
+
                 setAuth(data.user)
-                navigate
+                console.log(data.user);
+                console.log('el error esta en sidebar, header y/o outlet')
+                
             } catch (error) {
                 console.error(error);
-                setAuth({})
+                sessionStorage.removeItem('token')
             }
             finally{
                 setLoading(false)
@@ -39,7 +41,8 @@ const AuthProvider = ({children}) => {
     value={
         {
             auth,
-            setAuth
+            setAuth,
+            loading
         }
     }
     >

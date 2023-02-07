@@ -5,6 +5,7 @@ import useAuth from '../hooks/useAuth'
 
 export const ProtectedLayout = () => {
   const { auth, loading } = useAuth()
+  console.log(auth)
   {
     if (loading) {
       return (<p>Cargando</p>)
@@ -20,7 +21,7 @@ export const ProtectedLayout = () => {
           <>
           <Sidebar />
             <main className='text-center'>
-
+              Proyectos
               <Outlet />
             </main>
             </>

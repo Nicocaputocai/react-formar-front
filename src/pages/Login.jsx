@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Button, Container, Form, Nav } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Alerta } from '../components/Alert';
 import { clientAxios } from '../config/clientAxios';
 import useAuth from '../hooks/useAuth';
@@ -9,7 +9,7 @@ import { useForm } from '../hooks/useForm';
 export const Login = () => {
   const [alert,setAlert] = useState({});
   const {setAuth} = useAuth();
-
+  const navigate = useNavigate()
   const handleShowAlert = (msg, time = true) => {
     setAlert({
       msg
@@ -19,7 +19,7 @@ export const Login = () => {
         setAlert({});
       }, 3000);
     }
-
+    reset()
   }
   const {formValues,handleInputChange,reset} = useForm({
     email:"",
@@ -40,9 +40,10 @@ export const Login = () => {
         email,
         password
       })
-      console.log(data);
+      // console.log(data);
       setAuth(data.user)
       sessionStorage.setItem('token', data.token) //Cuando cierro el navegador se borra. Para que no se borre va en localStorage
+      navigate('/projects')
 
     } catch (error) {
       console.log(error);
