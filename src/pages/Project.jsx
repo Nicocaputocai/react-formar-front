@@ -80,7 +80,7 @@
 //De Eric
 
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Collaborator } from "../components/Collaborator/Collaborator";
 import { Task } from "../components/Task/Task";
 import { useProjects } from "../hooks/useProjects";
@@ -89,7 +89,7 @@ import { useProjects } from "../hooks/useProjects";
 
 export const Project = () => {
   const { loading, alert, getProject, project } = useProjects();
-
+  const {id} = useParams();
   const { name, description, dataExpire, client } = project;
   useEffect(() => {
     getProject(id);
@@ -105,7 +105,7 @@ export const Project = () => {
             <h1 className="text-4xl uppercase font-bold">{name}</h1>
             <Link
               to={`/projects/edit-project/1`}
-              className="flex justify-center items-center gap-2 text-gray-500 hover:text-black uppercase font-bold"
+              className="flex justify-center items-center "
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

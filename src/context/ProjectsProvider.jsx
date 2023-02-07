@@ -18,11 +18,15 @@ const Toast = Swal.mixin({
 const ProjectsContext = createContext()
 
 const ProjectsProvider = ({children}) => {
+
 const navigate = useNavigate()
-const [projects, setProjects] = useState({});
-const [alert, setAlert ] = useState({})
-const [loading, setLoading] = useState(true)
-const [project, setProject] = useState({})
+
+
+const [alert, setAlert] = useState({});
+const [loading, setLoading] = useState(true);
+
+const [projects, setProjects] = useState([]);
+const [project, setProject] = useState({});
 
 const ShowAlert = (msg, time = true) => {
   setAlert({
@@ -43,12 +47,13 @@ const getProjects = async() =>{
     const token = sessionStorage.getItem('token');
 
     if(!token) return null
-    const config ={
-      headers:{
-        "Content-Type": 'application/json',
-        Authorization: token
-      }
-    }
+
+        const config = {
+            headers : {
+                "Content-Type" : "application/json",
+                Authorization : token
+            }
+        }
 
     const {data} = await clientAxios.get('/projects', config)
 
@@ -69,13 +74,13 @@ const getProject = async(id) =>{
     if(!token) return null;
 
     const config = {
-        headers : {
-            "Content-Type" : "application/json",
-            Authorization : token
-        }
-    }
+      headers : {
+          "Content-Type" : "application/json",
+          Authorization : token
+      }
+  }
 
-    const {data} = await clientAxios.get(`/projects/${id}`,config);
+  const {data} = await clientAxios.get(`/projects/${id}`,config);
     setProject(data.project)
 
   } catch (error) {
@@ -93,11 +98,11 @@ const storePoject = async (project) =>{
     if(!token) return null;
 
     const config = {
-        headers : {
-            "Content-Type" : "application/json",
-            Authorization : token
-        }
-    }
+      headers : {
+          "Content-Type" : "application/json",
+          Authorization : token
+      }
+  }
 
     const {data} = await clientAxios.post(`/projects`, project,config);
 
@@ -107,7 +112,7 @@ const storePoject = async (project) =>{
       icon: success,
       title: data.msg
     })
-navigate('/projects')
+navigate('projects')
   } catch (error) {
     console.log(error)
     ShowAlert(error.response? error.response.data.msg : "Hubo un error", false)
@@ -120,7 +125,7 @@ navigate('/projects')
         value={{
             loading,
             alert,
-            setAlert,
+            ShowAlert,
             projects,
             getProjects,
             getProject,

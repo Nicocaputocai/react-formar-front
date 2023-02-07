@@ -7,23 +7,28 @@ const AuthProvider = ({children}) => {
 
     const [auth,setAuth] = useState({});
     const [loading, setLoading] =useState(true)
+
+
     useEffect(() => {
         const authUser = async() =>{
             const token = sessionStorage.getItem('token')
-            if(!token){return null}
+            if(!token){
+                setLoading(false)
+                return null
+            }
 
             const config = {
-                headers:{
-                    "Content-Type": "application/json",
-                    Authorization: token
+                headers : {
+                    "Content-Type" : "application/json",
+                    Authorization : token
                 }
             }
             try {
-                const {data} = await clientAxios.get('/users/profile', config)
+                const {data} = await clientAxios.get('/users/profile',config);
 
                 setAuth(data.user)
-                console.log(data.user);
-                console.log('el error esta en sidebar, header y/o outlet')
+                // console.log(data.user);
+                // console.log('el error esta en sidebar, header y/o outlet')
                 
             } catch (error) {
                 console.error(error);
@@ -36,18 +41,19 @@ const AuthProvider = ({children}) => {
         authUser()
     }, [])
     
-  return (
-    <AuthContext.Provider
-    value={
-        {
-            auth,
-            setAuth,
-            loading
-        }
-    }
-    >
-        {children}
-    </AuthContext.Provider>
+    return (
+        <AuthContext.Provider
+            value={
+                {
+                    auth,
+                    setAuth,
+                    loading
+                }
+            }
+        >
+            {children}
+
+        </AuthContext.Provider>
   )
 }
 

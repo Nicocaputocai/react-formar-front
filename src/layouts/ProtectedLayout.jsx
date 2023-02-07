@@ -3,14 +3,15 @@ import { Header } from '../components/Header/Header'
 import { Sidebar } from '../components/Sidebar/Sidebar'
 import useAuth from '../hooks/useAuth'
 
+
 export const ProtectedLayout = () => {
   const { auth, loading } = useAuth()
-  console.log(auth)
-  {
+  // console.log(auth)
+  
     if (loading) {
       return (<p>Cargando</p>)
     }
-  }
+  
   return (
     <>
 
@@ -27,12 +28,9 @@ export const ProtectedLayout = () => {
             </>
           </>
 
-        ) : <Navigate to="/" />
-      }
-
-
-
+        ) :( 
+        <Navigate to="/" />
+        )}
     </>
-
   )
 }

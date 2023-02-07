@@ -9,7 +9,8 @@ import { useForm } from '../hooks/useForm';
 export const Login = () => {
   const [alert,setAlert] = useState({});
   const {setAuth} = useAuth();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  
   const handleShowAlert = (msg, time = true) => {
     setAlert({
       msg
@@ -24,15 +25,15 @@ export const Login = () => {
   const {formValues,handleInputChange,reset} = useForm({
     email:"",
     passwords: ""
-  }
-  )
+  });
   const {email,password} = formValues
 
   const handleSubmit= async (e) =>{
-    e.preventDefault()
-    if([email, password].includes("")){
-      handleShowAlert('Todos los campos son obligatorios')
-      return null
+    e.preventDefault();
+
+    if ([email, password].includes("")) {
+      handleShowAlert("Todos los campos son obligatorios");
+      return null;
     }
 
     try {

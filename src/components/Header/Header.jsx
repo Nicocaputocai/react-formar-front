@@ -1,75 +1,43 @@
-// import React from 'react'
-// import {Nav, Container,Button, Navbar, Form} from "react-bootstrap"
-// import { Link } from 'react-router-dom'
 
-// export const Header = () => {
-//     return (
-//         <>
-//                 <Navbar bg="light" expand="lg">
-//                     <Container fluid>
-//                         <Navbar.Brand href="#">Projects Manager</Navbar.Brand>
-//                         <Form className="d-flex">
-//                                 <Form.Control
-//                                     type="search"
-//                                     placeholder="Search"
-//                                     className="me-2"
-//                                     aria-label="Search"
-//                                 />
-//                                 <Button variant="outline-success">Search</Button>
-//                             </Form>
-//                         <Navbar.Toggle aria-controls="navbarScroll" />
-//                         <Navbar.Collapse id="navbarScroll">
-//                             <Nav
-//                                 className="me-auto my-2 my-lg-0"
-//                                 style={{ maxHeight: '100px' }}
-//                                 navbarScroll
-//                             >
-//                                 <Nav.Item as={Link} href="#action1">Proyectos</Nav.Item>
-//                                 <Nav.Link href="#action2">Link</Nav.Link>
-                                
-//                                 <Nav.Link href="#" disabled>
-//                                     Link
-//                                 </Nav.Link>
-//                                 <Button 
-//                                 type="button"
-//                                 /* onClick={closeSession} */>
-//                                 </Button>
-//                             </Nav>
-
-//                         </Navbar.Collapse>
-//                     </Container>
-//                 </Navbar>
-//         </>
-//     )
-// }
-
-//De Eric
-import React from "react";
-import { Link } from "react-router-dom";
+import {Nav, Container,Button, Navbar, Form, NavItem} from "react-bootstrap"
+import { Link } from 'react-router-dom'
 
 export const Header = () => {
-
     return (
-        <div className="px-4 py-5 bg-white border-b">
-        <div className="flex flex-col md:flex-row justify-between md:items-center gap-4">
-            <h2 className="text-4xl text-sky-600 font-black md:w-1/4">Projects Manager</h2>
-            <input type="text" placeholder="Buscar projecto..." className="rounded-lg w:3/3 md:w-1/3 lg:w-1/3 p-2 border"/>
-            <div className="flex justify-between items-center gap-4">
-                <Link
-                 to='/projects'
-                 className="font-bold uppercase"
-                >
-                    Proyectos
-                </Link>
-                <button
-                type="button"
-                /* onClick={closeSession} */
-                className="text-white text-sm bg-sky-600 p-2 rounded uppercase font-bold"
-                >
-                    Cerrar sesión
-                </button>
-            </div>
-        </div>
-    </div>
-    );
-};
+        <>
+                <Navbar bg="light" expand="lg">
+                    <Container fluid>
+                        <Navbar.Brand href="#">Projects Manager</Navbar.Brand>
+                        <Form className="d-flex">
+                                <Form.Control
+                                    type="search"
+                                    placeholder="Search"
+                                    className="me-2"
+                                    aria-label="Search"
+                                />
+                                <Button className="m-2" variant="outline-success">Search</Button>
+                            </Form>
+                        <Navbar.Toggle aria-controls="navbarScroll" />
+                        <Navbar.Collapse id="navbarScroll">
+                            <Nav
+                                className="me-auto my-2 my-lg-0"
+                                style={{ maxHeight: '100px' }}
+                                navbarScroll
+                            >
+                                <Button className="m-2">
+                                Proyectos
+                                <NavItem as={Link} to="/projects"></NavItem>
+                                </Button>
+                                <Button  className="m-2"
+                                type="button"
+                                /* onClick={closeSession} */>
+                                    Cerrar sesión
+                                </Button>
+                            </Nav>
+
+                        </Navbar.Collapse>
+                    </Container>
+                </Navbar>
+        </>
+    )
+}

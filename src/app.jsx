@@ -41,15 +41,15 @@ export const App = () => {
             />
             <Route 
             path="create-project"
-            element={ProjectAdd}
+            element={<ProjectAdd />}
             />
             <Route 
             path="edit-project/:id"
-            element={ProjectEdit}
+            element={<ProjectEdit />}
             />
             <Route 
             path=":id"
-            element={Project}
+            element={<Project />}
             />
         </Route>        
         </Routes>

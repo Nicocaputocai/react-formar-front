@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "react-bootstrap";
 import { useForm } from "../../hooks/useForm";
 import { useProjects } from "../../hooks/useProjects";
 import { Alerta } from "../Alert";
@@ -15,7 +16,7 @@ export const FormProject = () => {
   })
 
   const {name, description, dateExpire, client} = formValues;
-  
+
   const handleSubmit = (e) => {
     e.preventDefault()
     if([name,description,dateExpire,client].includes("")){
@@ -23,6 +24,12 @@ export const FormProject = () => {
       return null
     };
 
+    storeProject({
+      name,
+      description,
+      dateExpire,
+      client
+    })
   }
 
   return (
@@ -31,7 +38,7 @@ export const FormProject = () => {
       onSubmit={handleSubmit}
     >
      {
-      alert.msg && <Alert {...alert} />
+      alert.msg && <Alerta {...alert} />
      }
       <div className="mb-5">
         <label
@@ -70,13 +77,13 @@ export const FormProject = () => {
       </div>
       <div className="mb-5">
         <label
-          htmlFor="date-expire"
+          htmlFor="dateExpire"
           className="text-gray-700 uppercase font-bold text-sm"
         >
           Fecha de entrega
         </label>
         <input
-          id="date-expire"
+          id="dateExpire"
           type="date"
           className="border w-full p-2 mt-2 placeholder-gray-400 rounded-md"
           value={dateExpire}
@@ -101,9 +108,9 @@ export const FormProject = () => {
           name="client"
         />
       </div>
-      <button className={`${false ? "bg-green-600" : "bg-sky-600"} w-full p-3 uppercase font-bold text-white rounded-lg ${false ? "hover:bg-green-500" : "hover:bg-sky-500"}  transition-colors`}>
+      <Button variant={`${false ? 'success' : "secondary"}`}>
         {false ? "actualizar cambios" : "guardar proyecto"}
-      </button>
+      </Button>
     </form>
   );
 };
