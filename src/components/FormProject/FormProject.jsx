@@ -108,7 +108,7 @@ export const FormProject = () => {
           name="client"
         />
       </div>
-      <Button variant={`${false ? 'success' : "secondary"}`}>
+      <Button type="submit" variant={`${false ? 'success' : "secondary"}`}>
         {false ? "actualizar cambios" : "guardar proyecto"}
       </Button>
     </form>

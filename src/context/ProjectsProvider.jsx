@@ -91,7 +91,7 @@ const getProject = async(id) =>{
   }
 }
 
-const storePoject = async (project) =>{
+const storeProject = async (project) =>{
 
   try {
     const token = sessionStorage.getItem('token');
@@ -109,7 +109,7 @@ const storePoject = async (project) =>{
     setProjects([...projects, data.project]);
 
     Toast.fire({
-      icon: success,
+      icon: "success",
       title: data.msg
     })
 navigate('projects')
@@ -130,7 +130,7 @@ navigate('projects')
             getProjects,
             getProject,
             project,
-            storePoject
+            storeProject
         }}
     >
         {children}
