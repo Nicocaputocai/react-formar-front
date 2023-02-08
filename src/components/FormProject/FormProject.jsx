@@ -1,45 +1,69 @@
-import React from "react";
+import { useEffect, useRef } from "react";
 import { Button } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
 import { useProjects } from "../../hooks/useProjects";
 import { Alerta } from "../Alert";
 
 export const FormProject = () => {
+  const { id } = useParams();
+  const { alert, showAlert, storeProject, project } = useProjects();
+  let { formValues, handleInputChange, reset, setFormValues,getProject } = useForm({
+    name: "",
+    description: "",
+    dateExpire: "",
+    client: "",
+  });
 
-  const {alert, showAlert, storeProject} = useProjects();
+  let { name, description, dateExpire, client } = formValues;
 
-  const {formValues, handleInputChange, reset} = useForm({
-    name : "",
-    description : "",
-    dateExpire : "",
-    client : ""
-  })
+  useEffect(() => {
+    if (id) {
 
-  const {name, description, dateExpire, client} = formValues;
+      
+      // let { name, description, dateExpire, client } = project;
+      inputName.current.value = project.name;
+      inputDescription.current.value =  project.description;
+      inputClient.current.value =  project.client;
+      inputDateExpire.current.value =  project.dateExpire.split("T")[0];
+      
+      setFormValues({
+        name : project.name,
+        description : project.description, 
+        dateExpire: project.dateExpire.split("T")[0],
+        client: project.client
+      })
+
+    }
+  }, [id]);
+
+  const inputName = useRef(null);
+  const inputDescription = useRef(null);
+  const inputDateExpire = useRef(null);
+  const inputClient = useRef(null);
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    if([name,description,dateExpire,client].includes("")){
+    e.preventDefault();
+    if ([name, description, dateExpire, client].includes("")) {
       showAlert("Todos los campos son obligatorios");
-      return null
-    };
-
+      return null;
+    }
+    console.log(formValues)
     storeProject({
+      id: id ? id : null,
       name,
       description,
       dateExpire,
-      client
-    })
-  }
+      client,
+    });
+  };
 
   return (
     <form
       className="bg-white py-5 px-5 md:w-4/4 lg:w-3/4 rounded-md border-2"
       onSubmit={handleSubmit}
     >
-     {
-      alert.msg && <Alerta {...alert} />
-     }
+      {alert.msg && <Alerta {...alert} />}
       <div className="mb-5">
         <label
           htmlFor="name"
@@ -55,6 +79,7 @@ export const FormProject = () => {
           value={name}
           onChange={handleInputChange}
           name="name"
+          ref={inputName}
         />
       </div>
       <div className="mb-5">
@@ -73,6 +98,7 @@ export const FormProject = () => {
           value={description}
           onChange={handleInputChange}
           name="description"
+          ref={inputDescription}
         />
       </div>
       <div className="mb-5">
@@ -89,6 +115,7 @@ export const FormProject = () => {
           value={dateExpire}
           onChange={handleInputChange}
           name="dateExpire"
+          ref={inputDateExpire}
         />
       </div>
       <div className="mb-5">
@@ -106,10 +133,11 @@ export const FormProject = () => {
           value={client}
           onChange={handleInputChange}
           name="client"
+          ref={inputClient}
         />
       </div>
-      <Button type="submit" variant={`${false ? 'success' : "secondary"}`}>
-        {false ? "actualizar cambios" : "guardar proyecto"}
+      <Button type="submit" variant={`${false ? "success" : "secondary"}`}>
+        {id ? "Actualizar proyecto" : "Guardar proyecto"}
       </Button>
     </form>
   );

@@ -90,7 +90,7 @@ import { useProjects } from "../hooks/useProjects";
 export const Project = () => {
   const { loading, alert, getProject, project } = useProjects();
   const {id} = useParams();
-  const { name, description, dataExpire, client } = project;
+  const { name, description, dataExpire, client, _id } = project;
   useEffect(() => {
     getProject(id);
   }, [id]);
@@ -104,7 +104,7 @@ export const Project = () => {
           <div className="flex justify-between">
             <h1 className="text-4xl uppercase font-bold">{name}</h1>
             <Link
-              to={`/projects/edit-project/1`}
+              to={`/projects/edit-project/${_id}`}
               className="flex justify-center items-center "
             >
               <svg

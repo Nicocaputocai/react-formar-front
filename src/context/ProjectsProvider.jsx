@@ -104,7 +104,24 @@ const storeProject = async (project) =>{
       }
   }
 
-    const {data} = await clientAxios.post(`/projects`, project,config);
+  if(project.id){
+    const {data, id} = await clientAxios.put(`/projects/${project.id}`, project, config);
+    const projectsUpdated = projects.map(projectState =>{
+      if(projectState._id === data.project._id){
+        return data.project
+      }
+      return projectState
+    })
+
+    setProject(projectsUpdated)
+    Toast.fire({
+      icon: "success",
+      title: data.msg
+    })
+
+  }else{
+    
+    const {data} = await clientAxios.post(`/projects`, project, config);
 
     setProjects([...projects, data.project]);
 
@@ -112,12 +129,47 @@ const storeProject = async (project) =>{
       icon: "success",
       title: data.msg
     })
+  }
+
+    
 navigate('projects')
   } catch (error) {
     console.log(error)
     ShowAlert(error.response? error.response.data.msg : "Hubo un error", false)
   }
   
+}
+
+const deleteProject = async(id)=>{
+  try {
+    const token = sessionStorage.getItem('token');
+
+    if(!token){
+      return null;
+    }
+
+    const config = {
+        headers: {
+          "Content-Type": "Application/json",
+          Authorization: token
+        }
+    }
+
+    const {data} = await clientAxios.delete(`/projects/${id}`,config)
+
+    const projectsFiltered = projects.filter(project => project._id !== id);
+
+    setProjects(projectsFiltered);
+
+    Toast.fire({
+      icon: "success",
+      title: data.msg
+  }) 
+  navigate('projects')
+  } catch (error) {
+        console.error(error)
+        ShowAlert(error.response? error.response.data.msg : "Hubo un error....", false)
+  }
 }
 
   return (
@@ -130,7 +182,8 @@ navigate('projects')
             getProjects,
             getProject,
             project,
-            storeProject
+            storeProject,
+            deleteProject
         }}
     >
         {children}
